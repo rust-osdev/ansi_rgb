@@ -1,7 +1,7 @@
-pub use colored::*;
+use colored::*;
 
 fn main() {
-    println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",
+    println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",
         "Red".fg(red()),
         "Orange".fg(orange()),
         "Yellow".fg(yellow()),
@@ -13,6 +13,7 @@ fn main() {
         "Blue".fg(white()).bg(blue()),
         "Blue magenta".fg(white()).bg(blue_magenta()),
         "Magenta".fg(magenta()),
-        "Magenta pink".fg(magenta_pink())
+        "Magenta pink".fg(magenta_pink()),
+        "Custom color".fg(Rgb::new(123, 231, 111)).bg(Rgb::new(10, 100, 20))
     );
 }
