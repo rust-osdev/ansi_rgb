@@ -23,4 +23,4 @@ fn main() {
 }
 ```
 
-![Colorful output](https://imgur.com/9j1FLiU)
+![Colorful output](https://imgur.com/9j1FLiU.png)
