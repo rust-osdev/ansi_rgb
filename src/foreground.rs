@@ -2,7 +2,7 @@ use crate::colors::*;
 use core::fmt;
 
 pub trait Foreground: Sized {
-    fn foreground(self, rgb: Rgb) -> WithForeground<Self>;
+    fn fg(self, rgb: Rgb) -> WithForeground<Self>;
 }
 
 pub struct WithForeground<T> {
@@ -11,7 +11,7 @@ pub struct WithForeground<T> {
 }
 
 impl<T> Foreground for &T {
-    fn foreground(self, rgb: Rgb) -> WithForeground<Self> {
+    fn fg(self, rgb: Rgb) -> WithForeground<Self> {
         WithForeground {
             t: self,
             rgb

@@ -1,14 +1,18 @@
 pub use colored::*;
 
 fn main() {
-    println!("{}, {}, {}, {}, {}, {}, {}, {}",
-        "Red".foreground(Colors::black()).background(Colors::red()),
-        "Orange".foreground(Colors::black()).background(Colors::orange()),
-        "Yellow".foreground(Colors::black()).background(Colors::yellow()),
-        "Green".foreground(Colors::black()).background(Colors::green()),
-        "Cyan".foreground(Colors::black()).background(Colors::cyan()),
-        "Blue".foreground(Colors::white()).background(Colors::blue()),
-        "Purple".foreground(Colors::white()).background(Colors::purple()),
-        "Violet".foreground(Colors::white()).background(Colors::violet())
+    println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",
+        "Red".fg(red()),
+        "Orange".fg(orange()),
+        "Yellow".fg(yellow()),
+        "Yellow green".fg(yellow_green()),
+        "Green".fg(green()),
+        "Green cyan".fg(green_cyan()),
+        "Cyan".fg(cyan()),
+        "Cyan blue".fg(white()).bg(cyan_blue()),
+        "Blue".fg(white()).bg(blue()),
+        "Blue magenta".fg(white()).bg(blue_magenta()),
+        "Magenta".fg(magenta()),
+        "Magenta pink".fg(magenta_pink())
     );
 }

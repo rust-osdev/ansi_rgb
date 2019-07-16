@@ -2,7 +2,7 @@ use crate::colors::*;
 use core::fmt;
 
 pub trait Background: Sized {
-    fn background(self, rgb: Rgb) -> WithBackground<Self>;
+    fn bg(self, rgb: Rgb) -> WithBackground<Self>;
 }
 
 pub struct WithBackground<T> {
@@ -11,7 +11,7 @@ pub struct WithBackground<T> {
 }
 
 impl<T> Background for &T {
-    fn background(self, rgb: Rgb) -> WithBackground<Self> {
+    fn bg(self, rgb: Rgb) -> WithBackground<Self> {
         WithBackground {
             t: self,
             rgb
