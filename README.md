@@ -24,3 +24,5 @@ fn main() {
 ```
 
 ![Colorful output](https://imgur.com/9j1FLiU.png)
+
+Context here: https://github.com/phil-opp/blog_os/issues/603
