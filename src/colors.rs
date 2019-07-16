@@ -17,9 +17,23 @@ impl Rgb {
     }
 }
 
+impl Default for Rgb {
+    fn default() -> Self {
+        Rgb::new(0, 0, 0)
+    }
+}
+
 pub struct Colors();
 
 impl Colors {
+    pub fn white() -> Rgb {
+        Rgb::new(255, 255, 255)
+    }
+
+    pub fn black() -> Rgb {
+        Default::default()
+    }
+
     pub fn red() -> Rgb {
         Rgb::new(255, 0, 0)
     }
