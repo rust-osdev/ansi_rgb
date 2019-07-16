@@ -1,5 +1,5 @@
 [package]
-name = "colored"
+name = "ansi_rgb"
 version = "0.1.0"
 authors = ["Matt Thomas <me@matthewathomas.com>"]
 edition = "2018"

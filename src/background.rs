@@ -1,4 +1,4 @@
-use crate::colors::*;
+use crate::rgb::*;
 use core::fmt;
 
 pub trait Background: Sized {

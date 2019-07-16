@@ -1,8 +1,8 @@
-# colored-rs
+# ansi_rgb
 ANSI escape code colors for `no_std` environments.
 
 ```rust
-use colored::*;
+use ansi_rgb::*;
 
 fn main() {
     println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",

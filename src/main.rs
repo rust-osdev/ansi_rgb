@@ -1,4 +1,4 @@
-use colored::*;
+use ansi_rgb::*;
 
 fn main() {
     println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",

@@ -1,9 +1,9 @@
 #![no_std]
 
 mod background;
-mod colors;
 mod foreground;
+mod rgb;
 
 pub use background::*;
-pub use colors::*;
 pub use foreground::*;
+pub use rgb::*;
