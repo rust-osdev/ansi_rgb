@@ -1,17 +1,20 @@
-use crate::rgb::*;
 use core::fmt;
+use rgb::RGB8;
 
+/// Adds a background color
 pub trait Background: Sized {
-    fn bg(self, rgb: Rgb) -> WithBackground<Self>;
+    /// Adds the given background color
+    fn bg(self, rgb: RGB8) -> WithBackground<Self>;
 }
 
+/// Something with a background color
 pub struct WithBackground<T> {
     t: T,
-    rgb: Rgb
+    rgb: RGB8
 }
 
-impl<T> Background for &T {
-    fn bg(self, rgb: Rgb) -> WithBackground<Self> {
+impl<T> Background for T {
+    fn bg(self, rgb: RGB8) -> WithBackground<Self> {
         WithBackground {
             t: self,
             rgb

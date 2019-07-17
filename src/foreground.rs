@@ -1,17 +1,20 @@
-use crate::rgb::*;
 use core::fmt;
+use rgb::RGB8;
 
+/// Adds a foreground color
 pub trait Foreground: Sized {
-    fn fg(self, rgb: Rgb) -> WithForeground<Self>;
+    /// Adds the given foreground color
+    fn fg(self, rgb: RGB8) -> WithForeground<Self>;
 }
 
+/// Something with a foreground color
 pub struct WithForeground<T> {
     t: T,
-    rgb: Rgb
+    rgb: RGB8
 }
 
-impl<T> Foreground for &T {
-    fn fg(self, rgb: Rgb) -> WithForeground<Self> {
+impl<T> Foreground for T {
+    fn fg(self, rgb: RGB8) -> WithForeground<Self> {
         WithForeground {
             t: self,
             rgb
