@@ -25,7 +25,7 @@ println!("{}", "Hello, world!".fg(red()));
 
 Output:
 
-<code style="color: red">Hello, world!</code>
+![Red on natural](https://i.imgur.com/odonuth.png)
 
 # Background colors
 
@@ -37,7 +37,7 @@ println!("{}", "Hello, world!".bg(red()));
 
 Output:
 
-<code style="background: red">Hello, world!</code>
+![Natural on red](https://i.imgur.com/fU1unJ9.png)
 
 # Mix and match
 
@@ -58,7 +58,7 @@ println!("{}", "Yuck".fg(fg).bg(bg));
 
 Output:
 
-<code style="color: #7BE76F; background: #0A6414">Yuck</code>
+![Yuck](https://i.imgur.com/ippM4tf.png)
 
 # Anything formattable
 
@@ -72,7 +72,7 @@ println!("{:?}", foo.fg(green()));
 
 Output:
 
-<code style="color: #00FF00">Foo(1, 2)</code>
+![Green foo](https://i.imgur.com/f3sFuIV.png)
 
 # Windows users
 
