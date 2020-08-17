@@ -1,33 +1,35 @@
 use core::fmt;
-use rgb::RGB8;
+use crate::Canvas;
+use crate::Color;
 
 /// Adds a background color
-pub trait Background: Sized {
+pub trait Background<TColor : Color>: Sized {
     /// Adds the given background color
-    fn bg(self, rgb: RGB8) -> WithBackground<Self>;
+    fn bg(self, color: TColor) -> WithBackground<Self, TColor>;
 }
 
 /// Something with a background color
-pub struct WithBackground<T> {
+pub struct WithBackground<T, TColor : Color> {
     t: T,
-    rgb: RGB8
+    color: TColor
 }
 
-impl<T> Background for T {
-    fn bg(self, rgb: RGB8) -> WithBackground<Self> {
+impl<T, TColor : Color> Background<TColor> for T {
+    fn bg(self, color: TColor) -> WithBackground<Self, TColor> {
         WithBackground {
             t: self,
-            rgb
+            color
         }
     }
 }
 
 macro_rules! impl_me {
     ($bound:path, $format_arg:expr) => {
-        impl<T> $bound for WithBackground<T>
-        where T: $bound {
-            fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-                write!(f, concat!("\x1B[48;2;{};{};{}m", $format_arg, "\x1B[0m"), self.rgb.r, self.rgb.g, self.rgb.b, self.t)
+        impl<T : $bound, TColor : Color> $bound for WithBackground<T, TColor> {
+            fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+                self.color.prelude(f, Canvas::Background)
+                .and_then(|_| write!(f, $format_arg, self.t))
+                .and_then(|_| self.color.epilogue(f, Canvas::Background))
             }
         }
     };

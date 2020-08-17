@@ -75,9 +75,13 @@ You need to [set your console mode](https://docs.microsoft.com/en-us/windows/con
  */
 
 mod background;
+mod canvas;
+mod color;
 mod colors;
 mod foreground;
 
 pub use background::*;
+pub use canvas::*;
+pub use color::*;
 pub use colors::*;
 pub use foreground::*;

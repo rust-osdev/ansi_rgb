@@ -2,7 +2,7 @@
 # It is not intended for manual editing.
 [[package]]
 name = "ansi_rgb"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "rgb 0.8.13 (registry+https://github.com/rust-lang/crates.io-index)",
 ]

@@ -1,4 +1,18 @@
 use rgb::RGB8;
+use crate::Canvas;
+use crate::Color;
+
+impl Color for RGB8 {
+    fn prelude(&self, f: &mut core::fmt::Formatter, canvas: crate::Canvas) -> core::fmt::Result {
+        match canvas {
+            Canvas::Foreground => write!(f, "\x1B[38;2;{};{};{}m", self.r, self.g, self.b),
+            Canvas::Background => write!(f, "\x1B[48;2;{};{};{}m", self.r, self.g, self.b)
+        }
+    }
+    fn epilogue(&self, f: &mut core::fmt::Formatter, _canvas: crate::Canvas) -> core::fmt::Result {
+        write!(f, "\x1B[0m")
+    }
+}
 
 /// Makes <code style="color: black; background: #FFFFFF">white</code>
 pub const fn white() -> RGB8 {
