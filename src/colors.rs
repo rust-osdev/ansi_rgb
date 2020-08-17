@@ -9,9 +9,6 @@ impl Color for RGB8 {
             Canvas::Background => write!(f, "\x1B[48;2;{};{};{}m", self.r, self.g, self.b)
         }
     }
-    fn epilogue(&self, f: &mut core::fmt::Formatter, _canvas: crate::Canvas) -> core::fmt::Result {
-        write!(f, "\x1B[0m")
-    }
 }
 
 /// Makes <code style="color: black; background: #FFFFFF">white</code>
