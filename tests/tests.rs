@@ -50,3 +50,20 @@ fn foo() {
     let foo = Foo(1, 2);
     println!("{:?}", foo.fg(green()));
 }
+
+#[test]
+fn color3() {
+    let hello_world = "Hello, world";
+    let formatted = hello_world.fg(Color3::BLUE);
+    assert_eq!("\u{1b}[34mHello, world\u{1b}[0m", format!("{}", formatted));
+}
+
+#[test]
+fn color4() {
+    let hello_world = "Hello, world";
+    let formatted = hello_world.fg(Color4::BLACK).bg(Color4::WHITE);
+    assert_eq!(
+        "\u{1b}[107m\u{1b}[30mHello, world\u{1b}[0m\u{1b}[0m",
+        format!("{}", formatted)
+    );
+}
