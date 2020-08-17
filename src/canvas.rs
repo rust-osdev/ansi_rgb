@@ -1,4 +1,4 @@
 pub enum Canvas {
     Background,
-    Foreground
+    Foreground,
 }

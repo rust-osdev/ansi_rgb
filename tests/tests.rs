@@ -3,7 +3,8 @@ use rgb::RGB8;
 
 #[test]
 fn use_all_colors() {
-    println!("{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",
+    println!(
+        "{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}\n{}",
         "Red".fg(red()),
         "Orange".fg(orange()),
         "Yellow".fg(yellow()),
@@ -16,7 +17,9 @@ fn use_all_colors() {
         "Blue magenta".fg(white()).bg(blue_magenta()),
         "Magenta".fg(magenta()),
         "Magenta pink".fg(magenta_pink()),
-        "Custom color".fg(RGB8::new(123, 231, 111)).bg(RGB8::new(10, 100, 20))
+        "Custom color"
+            .fg(RGB8::new(123, 231, 111))
+            .bg(RGB8::new(10, 100, 20))
     );
 }
 
@@ -32,7 +35,10 @@ fn formatting_of_pointers() {
     // https://github.com/rust-osdev/ansi_rgb/issues/2
     let hello_world = "Hello, world";
     let formatted = hello_world.fg(red()).bg(blue());
-    assert_eq!("\u{1b}[48;2;0;0;255m\u{1b}[38;2;255;0;0mHello, world\u{1b}[0m\u{1b}[0m", format!("{}", formatted));
+    assert_eq!(
+        "\u{1b}[48;2;0;0;255m\u{1b}[38;2;255;0;0mHello, world\u{1b}[0m\u{1b}[0m",
+        format!("{}", formatted)
+    );
 }
 
 #[test]
