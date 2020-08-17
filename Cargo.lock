@@ -4,13 +4,13 @@
 name = "ansi_rgb"
 version = "0.3.0"
 dependencies = [
- "rgb 0.8.13 (registry+https://github.com/rust-lang/crates.io-index)",
+ "rgb 0.8.24 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "rgb"
-version = "0.8.13"
+version = "0.8.24"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
-"checksum rgb 0.8.13 (registry+https://github.com/rust-lang/crates.io-index)" = "4f089652ca87f5a82a62935ec6172a534066c7b97be003cc8f702ee9a7a59c92"
+"checksum rgb 0.8.24 (registry+https://github.com/rust-lang/crates.io-index)" = "7466cad0eb3303798229ffab23bb8f598d185c71f3dfa17cd751d440e375782a"
