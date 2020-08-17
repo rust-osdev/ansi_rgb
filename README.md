@@ -2,7 +2,8 @@
 Colorful console text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters).
 
  * Very simple API
- * Full color (using the [`rgb` crate](https://crates.io/crates/rgb))
+ * 3- and 4-bit colors
+ * 24-bit colors (using the [`rgb` crate](https://crates.io/crates/rgb))
  * Colors all the [formatting traits](https://doc.rust-lang.org/std/fmt/#formatting-traits)
  * `no_std` compliant
 
