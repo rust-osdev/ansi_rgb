@@ -19,7 +19,7 @@ pub trait FormatColor {
 }
 
 /// Something which has been colored
-pub struct Colored<T, TFormatColor: FormatColor> {
+pub struct Colored<T, TFormatColor> {
     t: T,
     format_color: TFormatColor,
     canvas: Canvas
