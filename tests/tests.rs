@@ -107,3 +107,11 @@ fn convert_color4_to_color8() {
         Color4::WHITE.into()
     )
 }
+
+#[test]
+fn format_padding() {
+    assert_eq!(
+        "\u{1b}[38;2;0;0;0mX    \u{1b}[0m",
+        format!("{:5}", "X".fg(black()))
+    )
+}
