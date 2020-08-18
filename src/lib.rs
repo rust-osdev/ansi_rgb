@@ -5,6 +5,7 @@ Colorful terminal text using [ANSI escape sequences](https://en.wikipedia.org/wi
  * Very simple API
  * 3-, 4-, 8-, and 24-bit colors
  * Colors all the [formatting traits](https://doc.rust-lang.org/std/fmt/#formatting-traits)
+ * Easy to add your own color types
  * `no_std` compliant
 
 # Foreground colors
@@ -34,7 +35,8 @@ Output:
 # Anything formattable
 
 ```rust
-# use ansi_rgb::*;
+use ansi_rgb::*;
+
 #[derive(Debug)]
 struct Foo(i32, i32);
 
@@ -102,6 +104,53 @@ println!("{}", "Yuck".fg(fg).bg(bg));
 Output:
 
 <code style="color: #7BE76F; background: #0A6414">Yuck</code>
+
+# Extending to other color types
+
+If you have your own color type and you know how to turn it into ANSI escape
+sequences then just implement `FormatColor`:
+
+```rust
+use ansi_rgb::{ Canvas, Colorable, FormatColor };
+use core::fmt;
+
+enum FavoriteColors {
+    SkyBlue,
+    RocketPlumeYellow,
+    TitaniumGray
+}
+
+impl FormatColor for FavoriteColors {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: &Canvas) -> fmt::Result {
+        let (r, g, b) = match self {
+            FavoriteColors::SkyBlue => (135, 206, 235),
+            FavoriteColors::RocketPlumeYellow => (255, 255, 0),
+            FavoriteColors::TitaniumGray => (86, 95, 107)
+        };
+        write!(
+            f,
+            "\x1B[{};2;{};{};{}m",
+            match canvas {
+                Canvas::Foreground => 38,
+                Canvas::Background => 48
+            },
+            r,
+            g,
+            b
+        )
+    }
+}
+
+println!(
+    "The sky is {}",
+    "blue".fg(FavoriteColors::SkyBlue)
+);
+# assert_eq!("The sky is \x1B[38;2;135;206;235mblue\x1B[0m", format!("The sky is {}", "blue".fg(FavoriteColors::SkyBlue)))
+```
+
+Output:
+
+<code><span>The sky is </span><span style="color: #87CEEB">blue</span></code>
 
 # Windows users
 

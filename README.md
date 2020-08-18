@@ -4,6 +4,7 @@ Colorful terminal text using [ANSI escape sequences](https://en.wikipedia.org/wi
  * Very simple API
  * 3-, 4-, 8-, and 24-bit colors
  * Colors all the [formatting traits](https://doc.rust-lang.org/std/fmt/#formatting-traits)
+ * Easy to add your own color types
  * `no_std` compliant
 
 [![crates.io badge](https://img.shields.io/crates/v/ansi_rgb.svg)](https://crates.io/crates/ansi_rgb)<br/>
