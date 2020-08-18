@@ -86,10 +86,12 @@ Output:
 
 # 24-bit colors
 
+Built-in support for [the `rgb` crate](https://crates.io/crates/rgb).
+
 ```toml
 # Cargo.toml
 [dependencies]
-rbg = "0.8"
+rgb = { version = "0.8", default-features = false }
 ```
 
 ```rust
