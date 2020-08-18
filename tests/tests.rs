@@ -67,3 +67,43 @@ fn color4() {
         format!("{}", formatted)
     );
 }
+
+#[test]
+fn color8_background() {
+    assert_eq!(
+        "\u{1b}[48;5;0mHello, world\u{1b}[0m",
+        format!("{}", "Hello, world".bg(Color8::new(0)))
+    );
+}
+
+#[test]
+fn color8_foreground() {
+    assert_eq!(
+        "\u{1b}[38;5;0mHello, world\u{1b}[0m",
+        format!("{}", "Hello, world".fg(Color8::new(0)))
+    );
+}
+
+#[test]
+fn convert_color3_to_color4() {
+    assert_eq!(
+        Color4::new(Color3::RED, false),
+        Color3::RED.into()
+    )
+}
+
+#[test]
+fn convert_color3_to_color8() {
+    assert_eq!(
+        Color8::new(0),
+        Color3::BLACK.into()
+    )
+}
+
+#[test]
+fn convert_color4_to_color8() {
+    assert_eq!(
+        Color8::new(15),
+        Color4::WHITE.into()
+    )
+}

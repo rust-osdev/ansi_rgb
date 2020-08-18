@@ -3,8 +3,7 @@
 Colorful terminal text using [ANSI escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_parameters).
 
  * Very simple API
- * 3- and 4-bit colors
- * 24-bit colors (using the [`rgb` crate](https://crates.io/crates/rgb))
+ * 3-, 4-, 8-, and 24-bit colors
  * Colors all the [formatting traits](https://doc.rust-lang.org/std/fmt/#formatting-traits)
  * `no_std` compliant
 
@@ -32,7 +31,58 @@ Output:
 
 <code style="background: red">Hello, world!</code>
 
-# Mix and match
+# Anything formattable
+
+```rust
+# use ansi_rgb::*;
+#[derive(Debug)]
+struct Foo(i32, i32);
+
+let foo = Foo(1, 2);
+println!("{:?}", foo.fg(green()));
+```
+
+Output:
+
+<code style="color: #00FF00">Foo(1, 2)</code>
+
+# 3-bit colors
+
+```rust
+use ansi_rgb::{ Colorable, Color3 };
+
+println!("{}", "Hello, world!".fg(Color3::RED).bg(Color3::BLACK));
+```
+
+Output:
+
+<code style="color: #800000; background: #000000">Hello, world!</code>
+
+# 4-bit colors
+
+```rust
+use ansi_rgb::{ Colorable, Color4 };
+
+println!("{}", "Hello, world!".fg(Color4::BRIGHT_RED).bg(Color4::BLACK));
+```
+
+Output:
+
+<code style="color: #ff0000; background: #000000">Hello, world!</code>
+
+# 8-bit colors
+
+```rust
+use ansi_rgb::{ Colorable, Color8 };
+
+println!("{}", "Hello, world!".fg(Color8::new(160)).bg(Color8::new(0)));
+```
+
+Output:
+
+<code style="color: #d70000; background: #000000">Hello, world!</code>
+
+# 24-bit colors
 
 ```toml
 # Cargo.toml
@@ -52,34 +102,6 @@ println!("{}", "Yuck".fg(fg).bg(bg));
 Output:
 
 <code style="color: #7BE76F; background: #0A6414">Yuck</code>
-
-# Anything formattable
-
-```rust
-# use ansi_rgb::*;
-#[derive(Debug)]
-struct Foo(i32, i32);
-
-let foo = Foo(1, 2);
-println!("{:?}", foo.fg(green()));
-```
-
-Output:
-
-<code style="color: #00FF00">Foo(1, 2)</code>
-
-# 3- and 4-bit colors
-
-```rust
-# use ansi_rgb::*;
-println!("{}", "Hello, world!".fg(Color3::RED).bg(Color3::BLACK));
-println!("{}", "Hello, world!".bg(Color4::new(Color3::RED, true)).bg(Color3::BLACK));
-```
-
-Output:
-
-<code style="color: #800000; background: #000000">Hello, world!</code><br>
-<code style="color: #ff0000; background: #000000">Hello, world!</code>
 
 # Windows users
 

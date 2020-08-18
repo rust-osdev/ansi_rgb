@@ -1,9 +1,10 @@
 use crate::Canvas;
 use crate::Color;
+use core::fmt;
 use rgb::RGB8;
 
 impl Color for RGB8 {
-    fn prelude(&self, f: &mut core::fmt::Formatter, canvas: crate::Canvas) -> core::fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[38;2;{};{};{}m", self.r, self.g, self.b),
             Canvas::Background => write!(f, "\x1B[48;2;{};{};{}m", self.r, self.g, self.b),
@@ -84,7 +85,7 @@ pub const fn magenta_pink() -> RGB8 {
 /// A 3-bit color type
 ///
 /// The exact colors usually depend on the terminal color scheme.
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub enum Color3 {
     BLACK = 0,
     RED = 1,
@@ -97,7 +98,7 @@ pub enum Color3 {
 }
 
 impl Color for Color3 {
-    fn prelude(&self, f: &mut core::fmt::Formatter, canvas: crate::Canvas) -> core::fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[{}m", 30 + *self as u8),
             Canvas::Background => write!(f, "\x1B[{}m", 40 + *self as u8),
@@ -111,7 +112,7 @@ impl Color for Color3 {
 /// their exact colors usually depend on the terminal color scheme. A 4-bit
 /// color without its bright bit set is identical to its corresponding 3-bit
 /// color (not necessarily the one with the same name).
-#[derive(Copy, Clone, Debug)]
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct Color4 {
     color3: Color3,
     bright: bool,
@@ -142,7 +143,7 @@ impl Color4 {
 }
 
 impl Color for Color4 {
-    fn prelude(&self, f: &mut core::fmt::Formatter, canvas: crate::Canvas) -> core::fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(
                 f,
@@ -155,5 +156,56 @@ impl Color for Color4 {
                 if self.bright { 100 } else { 40 } + self.color3 as u8
             ),
         }
+    }
+}
+
+impl From<Color3> for Color4 {
+    fn from(color3: Color3) -> Self {
+        Self::new(color3, false)
+    }
+}
+
+/// An 8-bit color
+#[derive(Copy, Clone, Debug, Eq, PartialEq)]
+pub struct Color8 {
+    byte: u8
+}
+
+impl Color8 {
+    /// Create a `Color8` using the given 8-bit color code.
+    /// See [https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
+    pub const fn new(byte: u8) -> Self {
+        Self { byte }
+    }
+}
+
+impl Color for Color8 {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result {
+        write!(
+            f,
+            "\x1B[{};5;{}m",
+            match canvas {
+                Canvas::Foreground => 38,
+                Canvas::Background => 48
+            },
+            self.byte
+        )
+    }
+}
+
+impl From<Color3> for Color8 {
+    fn from(color3: Color3) -> Self {
+        Self::new(color3 as u8)
+    }
+}
+
+impl From<Color4> for Color8 {
+    fn from(color4: Color4) -> Self {
+        Self::new(
+            (color4.color3 as u8) + match color4.bright {
+                true => 8,
+                false => 0
+            }
+        )
     }
 }
