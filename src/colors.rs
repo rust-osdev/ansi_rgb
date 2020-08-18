@@ -184,7 +184,7 @@ impl Color8 {
 
     /// New RGB color, each channel in range `0..6`
     pub fn new_rgb(r: u8, g: u8, b: u8) -> Result<Self, OutOfBoundsError> {
-        if r < 6 || g < 6 || b < 6 {
+        if r < 6 && g < 6 && b < 6 {
             Ok(Self {
                 byte: 16 + r * 36 + g * 6 + b,
             })
