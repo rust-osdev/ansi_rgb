@@ -165,6 +165,10 @@ impl From<Color3> for Color4 {
     }
 }
 
+/// Error type indicating an input argument was out of bounds
+#[derive(Debug)]
+pub struct OutOfBoundsError();
+
 /// An 8-bit color
 #[derive(Copy, Clone, Debug, Eq, PartialEq)]
 pub struct Color8 {
@@ -176,6 +180,26 @@ impl Color8 {
     /// See [https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit](https://en.wikipedia.org/wiki/ANSI_escape_code#8-bit)
     pub const fn new(byte: u8) -> Self {
         Self { byte }
+    }
+
+    /// New RGB color, each channel in range `0..6`
+    pub fn new_rgb(r: u8, g: u8, b: u8) -> Result<Self, OutOfBoundsError> {
+        if r < 6 || g < 6 || b < 6 {
+            Ok(Self {
+                byte: 16 + r * 36 + g * 6 + b,
+            })
+        } else {
+            Err(OutOfBoundsError())
+        }
+    }
+
+    /// New gray color in range `0..24`
+    pub fn new_gray(gray: u8) -> Result<Self, OutOfBoundsError> {
+        if gray < 24 {
+            Ok(Self { byte: 232 + gray })
+        } else {
+            Err(OutOfBoundsError())
+        }
     }
 }
 
