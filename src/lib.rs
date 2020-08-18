@@ -11,7 +11,7 @@ Colorful console text using [ANSI escape sequences](https://en.wikipedia.org/wik
 # Foreground colors
 
 ```rust
-use ansi_rgb::{ Foreground, red };
+use ansi_rgb::{ Colorable, red };
 
 println!("{}", "Hello, world!".fg(red()));
 ```
@@ -23,7 +23,7 @@ Output:
 # Background colors
 
 ```rust
-use ansi_rgb::{ Background, red };
+use ansi_rgb::{ Colorable, red };
 
 println!("{}", "Hello, world!".bg(red()));
 ```
@@ -41,7 +41,7 @@ rbg = "0.8"
 ```
 
 ```rust
-use ansi_rgb::{ Foreground, Background };
+use ansi_rgb::{ Colorable };
 use rgb::RGB8;
 
 let fg = RGB8::new(123, 231, 111);
@@ -68,6 +68,19 @@ Output:
 
 <code style="color: #00FF00">Foo(1, 2)</code>
 
+# 3- and 4-bit colors
+
+```rust
+# use ansi_rgb::*;
+println!("{}", "Hello, world!".fg(Color3::RED).bg(Color3::BLACK));
+println!("{}", "Hello, world!".bg(Color4::new(Color3::RED, true)).bg(Color3::BLACK));
+```
+
+Output:
+
+<code style="color: #800000; background: #000000">Hello, world!</code><br>
+<code style="color: #ff0000; background: #000000">Hello, world!</code>
+
 # Windows users
 
 You need to [set your console mode](https://docs.microsoft.com/en-us/windows/console/console-modes). Otherwise you'll get garbage like this:
@@ -75,16 +88,8 @@ You need to [set your console mode](https://docs.microsoft.com/en-us/windows/con
 `�[48;2;159;114;0m �[0m`
  */
 
-mod background;
-mod basic_color;
-mod canvas;
 mod color;
 mod colors;
-mod foreground;
 
-pub use background::*;
-pub use basic_color::*;
-pub use canvas::*;
 pub use color::*;
 pub use colors::*;
-pub use foreground::*;
