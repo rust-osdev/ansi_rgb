@@ -115,3 +115,13 @@ fn format_padding() {
         format!("{:5}", "X".fg(black()))
     )
 }
+
+#[test]
+fn convert_rgb_to_color8() {
+    assert_eq!(Color8::new_rgb(5, 2, 0).unwrap(), Color8::new(208));
+}
+
+#[test]
+fn convert_gray_to_color8() {
+    assert_eq!(Color8::new_gray(23).unwrap(), Color8::new(255));
+}
