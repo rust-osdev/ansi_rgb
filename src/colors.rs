@@ -4,7 +4,7 @@ use core::fmt;
 use rgb::RGB8;
 
 impl FormatColor for RGB8 {
-    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: &crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[38;2;{};{};{}m", self.r, self.g, self.b),
             Canvas::Background => write!(f, "\x1B[48;2;{};{};{}m", self.r, self.g, self.b),
@@ -98,7 +98,7 @@ pub enum Color3 {
 }
 
 impl FormatColor for Color3 {
-    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: &crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[{}m", 30 + *self as u8),
             Canvas::Background => write!(f, "\x1B[{}m", 40 + *self as u8),
@@ -143,7 +143,7 @@ impl Color4 {
 }
 
 impl FormatColor for Color4 {
-    fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: &crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(
                 f,
@@ -180,7 +180,7 @@ impl Color8 {
 }
 
 impl FormatColor for Color8 {
-    fn prelude(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: &Canvas) -> fmt::Result {
         write!(
             f,
             "\x1B[{};5;{}m",
