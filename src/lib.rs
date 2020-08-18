@@ -154,6 +154,18 @@ Output:
 
 <code><span>The sky is </span><span style="color: #87CEEB">blue</span></code>
 
+# Features
+
+`default` includes 3-, 4-, 8-, and 24-bit colors and depends on the `rgb` crate,
+giving you the following things:
+
+* Dependency on `rgb` crate
+* Implementation of `FormatColor` for `rgb::RGB8` type
+* `Color3` enum and its implementation of `FormatColor`
+* `Color4` struct and its implementation of `FormatColor`
+* `Color8` struct and its implementation of `FormatColor`
+* Color functions (`red()`, `orange()`, etc)
+
 # Windows users
 
 You need to [set your console mode](https://docs.microsoft.com/en-us/windows/console/console-modes). Otherwise you'll get garbage like this:
@@ -162,7 +174,9 @@ You need to [set your console mode](https://docs.microsoft.com/en-us/windows/con
  */
 
 mod color;
+#[cfg(feature = "default")]
 mod colors;
 
 pub use color::*;
+#[cfg(feature = "default")]
 pub use colors::*;
