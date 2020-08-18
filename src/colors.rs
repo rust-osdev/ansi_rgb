@@ -1,9 +1,9 @@
 use crate::Canvas;
-use crate::Color;
+use crate::FormatColor;
 use core::fmt;
 use rgb::RGB8;
 
-impl Color for RGB8 {
+impl FormatColor for RGB8 {
     fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[38;2;{};{};{}m", self.r, self.g, self.b),
@@ -97,7 +97,7 @@ pub enum Color3 {
     WHITE = 7,
 }
 
-impl Color for Color3 {
+impl FormatColor for Color3 {
     fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(f, "\x1B[{}m", 30 + *self as u8),
@@ -142,7 +142,7 @@ impl Color4 {
     pub const WHITE: Self = Self::new(Color3::WHITE, true);
 }
 
-impl Color for Color4 {
+impl FormatColor for Color4 {
     fn prelude(&self, f: &mut fmt::Formatter, canvas: crate::Canvas) -> fmt::Result {
         match canvas {
             Canvas::Foreground => write!(
@@ -179,7 +179,7 @@ impl Color8 {
     }
 }
 
-impl Color for Color8 {
+impl FormatColor for Color8 {
     fn prelude(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result {
         write!(
             f,
