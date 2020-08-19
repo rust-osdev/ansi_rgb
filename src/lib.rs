@@ -123,7 +123,7 @@ enum FavoriteColors {
 }
 
 impl FormatColor for FavoriteColors {
-    fn prelude(&self, f: &mut fmt::Formatter, canvas: &Canvas) -> fmt::Result {
+    fn prelude(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result {
         let (r, g, b) = match self {
             FavoriteColors::SkyBlue => (135, 206, 235),
             FavoriteColors::RocketPlumeYellow => (255, 255, 0),
