@@ -125,3 +125,11 @@ fn convert_rgb_to_color8() {
 fn convert_gray_to_color8() {
     assert_eq!(Color8::new_gray(23).unwrap(), Color8::new(255));
 }
+
+#[test]
+fn color8_new_rgb() {
+    assert!(Color8::new_rgb(6, 5, 5).is_err());
+    assert!(Color8::new_rgb(5, 6, 5).is_err());
+    assert!(Color8::new_rgb(5, 5, 6).is_err());
+    assert!(Color8::new_rgb(5, 5, 5).is_ok());
+}
