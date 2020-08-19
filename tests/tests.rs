@@ -36,7 +36,7 @@ fn formatting_of_pointers() {
     let hello_world = "Hello, world";
     let formatted = hello_world.fg(red()).bg(blue());
     assert_eq!(
-        "\u{1b}[48;2;0;0;255m\u{1b}[38;2;255;0;0mHello, world\u{1b}[0m\u{1b}[0m",
+        "\u{1b}[48;2;0;0;255m\u{1b}[38;2;255;0;0mHello, world\u{1b}[39m\u{1b}[49m",
         format!("{}", formatted)
     );
 }
@@ -55,7 +55,7 @@ fn foo() {
 fn color3() {
     let hello_world = "Hello, world";
     let formatted = hello_world.fg(Color3::BLUE);
-    assert_eq!("\u{1b}[34mHello, world\u{1b}[0m", format!("{}", formatted));
+    assert_eq!("\u{1b}[34mHello, world\u{1b}[39m", format!("{}", formatted));
 }
 
 #[test]
@@ -63,7 +63,7 @@ fn color4() {
     let hello_world = "Hello, world";
     let formatted = hello_world.fg(Color4::BLACK).bg(Color4::WHITE);
     assert_eq!(
-        "\u{1b}[107m\u{1b}[30mHello, world\u{1b}[0m\u{1b}[0m",
+        "\u{1b}[107m\u{1b}[30mHello, world\u{1b}[39m\u{1b}[49m",
         format!("{}", formatted)
     );
 }
@@ -71,7 +71,7 @@ fn color4() {
 #[test]
 fn color8_background() {
     assert_eq!(
-        "\u{1b}[48;5;0mHello, world\u{1b}[0m",
+        "\u{1b}[48;5;0mHello, world\u{1b}[49m",
         format!("{}", "Hello, world".bg(Color8::new(0)))
     );
 }
@@ -79,7 +79,7 @@ fn color8_background() {
 #[test]
 fn color8_foreground() {
     assert_eq!(
-        "\u{1b}[38;5;0mHello, world\u{1b}[0m",
+        "\u{1b}[38;5;0mHello, world\u{1b}[39m",
         format!("{}", "Hello, world".fg(Color8::new(0)))
     );
 }
@@ -111,7 +111,7 @@ fn convert_color4_to_color8() {
 #[test]
 fn format_padding() {
     assert_eq!(
-        "\u{1b}[38;2;0;0;0mX    \u{1b}[0m",
+        "\u{1b}[38;2;0;0;0mX    \u{1b}[39m",
         format!("{:5}", "X".fg(black()))
     )
 }

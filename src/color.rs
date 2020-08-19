@@ -13,8 +13,11 @@ pub trait FormatColor {
     fn prelude(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result;
 
     /// Undo the color application
-    fn epilogue(&self, f: &mut fmt::Formatter, #[allow(unused)] canvas: Canvas) -> fmt::Result {
-        f.write_str("\x1B[0m")
+    fn epilogue(&self, f: &mut fmt::Formatter, canvas: Canvas) -> fmt::Result {
+        f.write_str(match canvas {
+            Canvas::Foreground => "\x1B[39m",
+            Canvas::Background => "\x1B[49m"
+        })
     }
 }
 

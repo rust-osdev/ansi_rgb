@@ -32,6 +32,31 @@ Output:
 
 <code style="background: red">Hello, world!</code>
 
+# Nesting
+
+```rust
+use ansi_rgb::{ Colorable, blue, green, red };
+
+let formatted = format!(
+    "Hello, world! {}",
+    format!(
+        "{} is an interesting {}",
+        "This".fg(blue()),
+        "day".fg(red())
+    ).bg(green())
+);
+
+println!("{}", formatted);
+# assert_eq!(
+#     "Hello, world! \u{1b}[48;2;0;255;0m\u{1b}[38;2;0;0;255mThis\u{1b}[39m is an interesting \u{1b}[38;2;255;0;0mday\u{1b}[39m\u{1b}[49m",
+#     formatted
+# )
+```
+
+Output:
+
+<code>Hello, world! <span style="background: #00FF00"><span style="color: #0000FF">This</span> is an interesting <span style="color: #FF0000">day</span></span></code>
+
 # Anything formattable
 
 ```rust
@@ -147,7 +172,7 @@ println!(
     "The sky is {}",
     "blue".fg(FavoriteColors::SkyBlue)
 );
-# assert_eq!("The sky is \x1B[38;2;135;206;235mblue\x1B[0m", format!("The sky is {}", "blue".fg(FavoriteColors::SkyBlue)))
+# assert_eq!("The sky is \x1B[38;2;135;206;235mblue\x1B[39m", format!("The sky is {}", "blue".fg(FavoriteColors::SkyBlue)))
 ```
 
 Output:
