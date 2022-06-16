@@ -113,18 +113,11 @@ Output:
 
 Built-in support for [the `rgb` crate](https://crates.io/crates/rgb).
 
-```toml
-# Cargo.toml
-[dependencies]
-rgb = { version = "0.8", default-features = false }
-```
-
 ```rust
-use ansi_rgb::{ Colorable };
-use rgb::RGB8;
+use ansi_rgb::{ Colorable, rgb };
 
-let fg = RGB8::new(123, 231, 111);
-let bg = RGB8::new(10, 100, 20);
+let fg = rgb(123, 231, 111);
+let bg = rgb(10, 100, 20);
 println!("{}", "Yuck".fg(fg).bg(bg));
 ```
 
@@ -185,7 +178,7 @@ Output:
 giving you the following things:
 
 * Dependency on `rgb` crate
-* Implementation of `FormatColor` for `rgb::RGB8` type
+* Implementation of `FormatColor` for `rgb::RGB8` type through `rgb(r, g, b)` function
 * `Color3` enum and its implementation of `FormatColor`
 * `Color4` struct and its implementation of `FormatColor`
 * `Color8` struct and its implementation of `FormatColor`

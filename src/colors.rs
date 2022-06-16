@@ -82,7 +82,7 @@ pub const fn magenta_pink() -> RGB8 {
     RGB8::new(255, 0, 128)
 }
 
-/// Makes an <code style="color: black"><span style="background: #F00">R</span><span style="background: #0F0">G</span><span style="color: white; background: #00F">B</span></code> color
+/// Makes <code style="color: white"><span style="background: #B00">R</span><span style="background: #0B0">G</span><span style="background: #00B">B</span></code>
 pub const fn rgb(r: u8, g: u8, b: u8) -> RGB8 {
     RGB8::new(r, g, b)
 }
