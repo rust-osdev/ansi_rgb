@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "ansi_rgb"
-version = "0.3.1-alpha"
+version = "0.3.1-alpha2"
 dependencies = [
  "rgb",
 ]
