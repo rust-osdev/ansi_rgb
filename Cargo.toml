@@ -1,8 +1,8 @@
 [package]
 name = "ansi_rgb"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Matt Thomas <me@matthewathomas.com>"]
-edition = "2018"
+edition = "2021"
 description = "Colorful terminal text using ANSI escape sequences"
 license = "MIT"
 categories = ["no-std", "command-line-interface"]
